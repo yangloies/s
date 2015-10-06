@@ -1,0 +1,23 @@
+Private Sub CommandButton3_Click()
+'''''''''''''''''''''''''''
+    With ActiveSheet.DrawingObjects
+        If .Count > 0 Then .Delete
+     End With
+'''''''''''''''''''''''''''
+
+  For t = 1 To Val(dots)
+    Cells(t + 1, Val(quantity) + 4) = t
+  Next
+   
+
+  Application.Run "ATPVBAEN.XLAM!Histogram", ActiveSheet.Range(Cells(2, 2), Cells(Val(frequency) + 1, Val(quantity) + 1)) _
+    , ActiveSheet.Range(Cells(1, Val(quantity) + 5), Cells(1, Val(quantity) + 5)), ActiveSheet.Range(Cells(2, Val(quantity) + 4), Cells(Val(dots) + 1, Val(quantity) + 4)), False, False _
+    , True, False
+  Application.Run "ATPVBAEN.XLAM!Histogram", ActiveSheet.Range(Cells(2, Val(quantity) + 3), Cells(Val(frequency) + 1, Val(quantity) + 3)) _
+    , ActiveSheet.Range(Cells(15, Val(quantity) + 5), Cells(15, Val(quantity) + 5)), ActiveSheet.Range(Cells(2, Val(quantity) + 4), Cells(Val(dots) + 1, Val(quantity) + 4)), False, False _
+    , True, False
+
+  For t = 1 To Val(dots)
+    Cells(t + 1, Val(quantity) + 4) = ""
+  Next
+End Sub
