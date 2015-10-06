@@ -1,0 +1,27 @@
+Private Sub CommandButton1_Click()
+'''''''''''''''''''''''''''
+ Cells.Select
+ Selection.Delete Shift:=xlUp
+ Range("A1").Select
+'''''''''''''''''''''''''''
+Dim i  As Long
+Dim t  As Long
+For i = 1 To Val(frequency) '投擲次數從1到N次
+    Sum = Int(0)
+    avg = Int(0) '平均歸零
+    Dim X  As Long '令X為長變數
+      For t = 1 To Val(quantity) '骰N個骰子
+         X = Int((Val(dots) * Rnd) + 1) 'X變數=產生隨機(面數)
+         Cells(i + 1, t + 1) = X '第(i+1,t+1)儲存格的值為X
+         Cells(1, t + 1) = "第" & t & "個" '第(1,t+1)儲存格顯示為 第N個
+         Cells(i + 1, 1) = "第" & i & "組" '第(i+1,1)儲存格顯示為 第N組
+         avg = Application.WorksheetFunction.Average(Range(Cells(i + 1, 2), Cells(i + 1, Val(quantity) + 1))) 
+         '第N組儲存格的平均值
+         Sum = Application.WorksheetFunction.Sum(Range(Cells(i + 1, 2), Cells(i + 1, t + 1))) '第N組儲存格的點數和
+         Cells(1, Val(quantity) + 3) = "樣本平均" '第N個骰子後三格儲存格顯示平均
+         Cells(i + 1, Val(quantity) + 3) = avg '第N組骰子後儲存格顯示第N的平均值
+         Cells(1, Val(quantity) + 2) = "總和" '第N個骰子後兩格儲存格顯示總和
+         Cells(i + 1, Val(quantity) + 2) = Sum '第N組骰子後儲存格顯示第N的總和
+      Next
+Next
+End Sub
